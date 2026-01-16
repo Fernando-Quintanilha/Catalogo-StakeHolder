@@ -43,3 +43,23 @@ StakeHolder/
 │   ├── public/
 │   └── ...
 └── README.md
+```
+
+### Como Rodar o Projeto
+## Pré-requisitos
+Node.js
+Python 3.x
+
+```bash
+cd dataAnalyzer
+    pip install pandas openpyxl
+python build_catalog.py
+
+cd ..
+cd web-catalog
+npm install
+npm run dev
+```
+Desenvolvido por Fernando Quintanilha.
+
+
