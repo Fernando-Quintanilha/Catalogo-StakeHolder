@@ -50,7 +50,7 @@ export function ProductCard({ product }: ProductProps) {
         {quantidadeAtual === 0 ? (
           <button
             onClick={() => addToCart(product)}
-            className="w-full bg-green-600 text-white font-medium text-sm py-2 rounded hover:bg-green-700 active:bg-green-800 transition-colors shadow-sm flex items-center justify-center gap-2"
+            className="w-full bg-green-600 text-white font-medium text-sm py-2 rounded hover:bg-green-700 active:bg-green-800 transition-colors shadow-sm flex items-center justify-center gap-2 cursor-pointer"
           >
             Adicionar à Cotação
           </button>
@@ -66,7 +66,7 @@ export function ProductCard({ product }: ProductProps) {
                   updateCartQuantity(product.id, quantidadeAtual - 1);
                 }
               }}
-              className="px-4 py-2 hover:bg-green-100 text-lg transition-colors border-r border-green-200"
+              className="px-4 py-2 hover:bg-green-100 text-lg transition-colors border-r border-green-200 cursor-pointer"
             >
               -
             </button>
@@ -89,12 +89,12 @@ export function ProductCard({ product }: ProductProps) {
                   updateCartQuantity(product.id, 1);
                 }
               }}
-              className="w-full text-center bg-transparent focus:outline-none text-green-900 font-bold [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+              className="w-full text-center bg-transparent focus:outline-none text-green-900 font-bold [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none cursor-pointer"
             />
 
             <button
               onClick={() => addToCart(product)}
-              className="px-4 py-2 hover:bg-green-100 text-lg transition-colors border-l border-green-200"
+              className="px-4 py-2 hover:bg-green-100 text-lg transition-colors border-l border-green-200 cursor-pointer"
             >
               +
             </button>

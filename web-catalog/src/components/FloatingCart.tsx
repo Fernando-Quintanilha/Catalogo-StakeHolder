@@ -25,10 +25,10 @@ export function FloatingCart() {
             {/* float cart */}
             <button
                 onClick={() => setIsOpen(true)}
-                className="fixed bottom-6 right-6 bg-green-600 text-white p-4 rounded-full shadow-2xl hover:bg-green-700 hover:scale-110 transition-all z-50 flex items-center justify-center group"
+                className="fixed bottom-6 right-6 bg-green-600 text-white p-4 rounded-full shadow-2xl hover:bg-green-700 hover:scale-110 transition-all z-50 flex items-center justify-center group cursor-pointer"
             >
                 {/* Icone de Carrinho */}
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
                 </svg>
 
@@ -46,7 +46,7 @@ export function FloatingCart() {
 
                         <div className="p-4 bg-gray-50 border-b flex justify-between items-center">
                             <h2 className="font-bold text-lg text-gray-800">Seus itens</h2>
-                            <button onClick={() => setIsOpen(false)} className="text-gray-400 hover:text-red-500 p-2">
+                            <button onClick={() => setIsOpen(false)} className="text-gray-400 hover:text-red-500 p-2 font-bold cursor-pointer">
                                 ✕
                             </button>
                         </div>
@@ -74,13 +74,13 @@ export function FloatingCart() {
                                                 <p className="text-xs text-gray-500">Qtd: <strong className="text-gray-800 text-sm">{item.quantidade}</strong> ({item.UNIDADE})</p>
                                             </div>
 
-                                            {/*  (Lixeira) */}
+                                            {/*  Lixeira */}
                                             <button
                                                 onClick={() => removeFromCart(item.id)}
-                                                className="text-red-400 hover:text-red-600 p-2 hover:bg-red-50 rounded-full transition-colors"
+                                                className="text-red-400 hover:text-red-600 p-2 hover:bg-red-50 rounded-full transition-colors cursor-pointer"
                                                 title="Remover item"
                                             >
-                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                                                 </svg>
                                             </button>
@@ -94,7 +94,7 @@ export function FloatingCart() {
                             <button
                                 onClick={handleCheckout}
                                 disabled={cart.length === 0}
-                                className="w-full bg-green-600 text-white py-3 rounded-lg font-bold hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 shadow-lg hover:shadow-green-500/30 transition-all"
+                                className="w-full bg-green-600 text-white py-3 rounded-lg font-bold hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 shadow-lg hover:shadow-green-500/30 transition-all cursor-pointer"
                             >
                                 <span>Enviar no WhatsApp</span>
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
