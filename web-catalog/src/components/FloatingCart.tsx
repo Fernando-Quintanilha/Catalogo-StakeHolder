@@ -1,14 +1,22 @@
 import { useState } from 'react';
 import { useCart } from '../contexts/CartContext';
+import vendedoresData from '../data/vendedores.json';
+
+interface Vendedor {
+    id: number;
+    nome: string;
+    whatsapp: string;
+}
 
 export function FloatingCart() {
     const { cart, totalItems, removeFromCart } = useCart();
     const [isOpen, setIsOpen] = useState(false);
+    const [isVendorModalOpen, setIsVendorModalOpen] = useState(false);
 
-    const PHONE_NUMBER = "5562993340144";
+    const vendedores = vendedoresData as Vendedor[];
 
-    const handleCheckout = () => {
-        if (cart.length === 0) return;
+    const openWhatsAppCheckout = (whatsapp: string) => {
+        if (!whatsapp) return;
 
         let message = "*Olá! Gostaria de solicitar a cotação destes itens:*\n\n";
         cart.forEach(item => {
@@ -16,8 +24,24 @@ export function FloatingCart() {
         });
         message += "----------------\nAguardo o retorno!";
 
-        const url = `https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent(message)}`;
+        const url = `https://wa.me/${whatsapp}?text=${encodeURIComponent(message)}`;
         window.open(url, '_blank');
+    };
+
+    const handleVendorSelection = (vendedor: Vendedor) => {
+        setIsVendorModalOpen(false);
+        openWhatsAppCheckout(vendedor.whatsapp);
+    };
+
+    const handleCheckout = () => {
+        if (cart.length === 0) return;
+        if (vendedores.length === 0) return;
+        if (vendedores.length === 1) {
+            openWhatsAppCheckout(vendedores[0].whatsapp);
+            return;
+        }
+
+        setIsVendorModalOpen(true);
     };
 
     return (
@@ -93,16 +117,61 @@ export function FloatingCart() {
                         <div className="p-4 bg-gray-50 border-t">
                             <button
                                 onClick={handleCheckout}
-                                disabled={cart.length === 0}
+                                disabled={cart.length === 0 || vendedores.length === 0}
                                 className="w-full bg-green-600 text-white py-3 rounded-lg font-bold hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 shadow-lg hover:shadow-green-500/30 transition-all cursor-pointer"
                             >
-                                <span>Enviar no WhatsApp</span>
+                                <span>Enviar Cotação</span>
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
                                 </svg>
                             </button>
                         </div>
 
+                    </div>
+                </div>
+            )}
+
+            {isVendorModalOpen && (
+                <div
+                    className="fixed inset-0 bg-black/60 z-[60] flex items-center justify-center p-4 backdrop-blur-sm"
+                    onClick={() => setIsVendorModalOpen(false)}
+                >
+                    <div
+                        className="bg-white w-full max-w-md rounded-xl shadow-2xl overflow-hidden"
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        <div className="p-4 bg-gray-50 border-b flex justify-between items-center">
+                            <div>
+                                <h2 className="font-bold text-lg text-gray-800">Escolha um vendedor</h2>
+                                <p className="text-sm text-gray-500">Selecione para enviar sua cotação pelo WhatsApp.</p>
+                            </div>
+                            <button
+                                onClick={() => setIsVendorModalOpen(false)}
+                                className="text-gray-400 hover:text-red-500 p-2 font-bold cursor-pointer"
+                            >
+                                ✕
+                            </button>
+                        </div>
+
+                        <div className="p-4 space-y-3">
+                            {vendedores.map((vendedor) => (
+                                <div
+                                    key={vendedor.id}
+                                    className="border rounded-lg p-4 flex items-center justify-between gap-4"
+                                >
+                                    <div>
+                                        <p className="font-semibold text-gray-800">{vendedor.nome}</p>
+                                        <p className="text-sm text-gray-500">WhatsApp: {vendedor.whatsapp}</p>
+                                    </div>
+                                    <button
+                                        onClick={() => handleVendorSelection(vendedor)}
+                                        className="shrink-0 bg-green-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-green-700 transition-colors cursor-pointer"
+                                    >
+                                        Selecionar
+                                    </button>
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 </div>
             )}

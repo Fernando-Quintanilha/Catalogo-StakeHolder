@@ -1,0 +1,17 @@
+[
+    {
+        "id": 1,
+        "nome": "Fernando Quintanilha",
+        "whatsapp": "5562993340144"
+    },
+    {
+        "id": 2,
+        "nome": "Maria Oliveira",
+        "whatsapp": "556"
+    },
+    {
+        "id": 3,
+        "nome": "Carlos Pereira",
+        "whatsapp": "5562777777777"
+    }
+]

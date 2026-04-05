@@ -6,7 +6,7 @@ Uma solução full-stack para digitalização de processos de vendas. Este proje
 
 O sistema opera em uma arquitetura híbrida de automação de dados e interface web:
 
-1.  **Data Pipeline (Python):** Um script processa planilhas Excel brutas (`.xlsx`), trata os dados, redimensiona imagens e gera uma base JSON otimizada.
+1.  **Data Pipeline (Python):** Um script autentica no Sankhya Gateway, busca produtos via API REST paginada e gera uma base JSON otimizada.
 2.  **Frontend (React):** Uma interface moderna e responsiva consome esse JSON estático para renderizar o catálogo com alta performance.
 
 ## Tecnologias Utilizadas
@@ -20,8 +20,8 @@ O sistema opera em uma arquitetura híbrida de automação de dados e interface 
 
 ### Automação de Dados (dataAnalyzer)
 - **Python 3**: Linguagem de script.
-- **Pandas**: Manipulação e limpeza de dados do Excel.
-- **OpenPyXL**: Leitura de arquivos `.xlsx`.
+- **Requests**: Consumo da API REST do Sankhya.
+- **python-dotenv**: Carregamento de variáveis de ambiente via `.env`.
 
 ## Funcionalidades Principais
 
@@ -52,7 +52,8 @@ Python 3.x
 
 ```bash
 cd dataAnalyzer
-    pip install pandas openpyxl
+    pip install -r requirements.txt
+    copy .env.example .env
 python build_catalog.py
 
 cd ..
